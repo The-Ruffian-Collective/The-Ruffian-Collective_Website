@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The Ruffian Collective - Revolutionising industries through innovative SaaS solutions and creative marketing strategies">
     <title>The Ruffian Collective</title>
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Hotjar Tracking Code for Site 5165040 (name missing) -->
 <script>
     (function(h,o,t,j,a,r){
@@ -299,12 +301,13 @@
             resize: vertical;
         }
         footer {
-            background-color: #111;
-            color: #fff;
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid rgba(0, 245, 212, 0.1);
-        }
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px 0;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    border-top: 1px solid rgba(0, 245, 212, 0.1);
+}
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5em;
@@ -321,7 +324,92 @@
             #contact form {
                 padding: 20px;
             }
-        }
+             .cookie-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 15px;
+    }
+    .cookie-banner p {
+        padding-right: 0;
+    }
+    .social-links {
+        gap: 15px;
+    }
+    .social-links a {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+    }
+}
+        .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    padding: 10px;
+    border-radius: 50%;
+    background: rgba(0, 245, 212, 0.1);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links a:hover {
+    color: #00f5d4;
+    transform: translateY(-3px);
+    background: rgba(0, 245, 212, 0.2);
+}
+
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(0, 245, 212, 0.3);
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.cookie-banner.show {
+    transform: translateY(0);
+}
+
+.cookie-banner p {
+    margin: 0;
+    padding-right: 20px;
+}
+
+.cookie-banner .btn {
+    padding: 8px 20px;
+    white-space: nowrap;
+    background: #00f5d4;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cookie-banner .btn:hover {
+    background: #00d4b6;
+    transform: translateY(-2px);
+}
     </style>
 </head>
 <body>
@@ -402,9 +490,20 @@
 
     <footer>
         <div class="container">
+            <div class="social-links">
+                <a href="https://twitter.com/RuffianCollective" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/the-ruffian-collective" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/theruffiancollective" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/The-Ruffian-Collective" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
             <p>&copy; 2024 The Ruffian Collective. All rights reserved.</p>
         </div>
     </footer>
+
+    <div class="cookie-banner">
+        <p>We use cookies to enhance your experience and analyze site usage. By continuing to use this site, you consent to our use of cookies.</p>
+        <button class="btn" onclick="acceptCookies()">Accept & Close</button>
+    </div>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -482,6 +581,20 @@
             const bgImage = document.querySelector('.bg-image');
             bgImage.style.opacity = 1;
             document.body.style.opacity = 1;
+        });
+        // Cookie consent handling
+        function acceptCookies() {
+            document.querySelector('.cookie-banner').style.transform = 'translateY(100%)';
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+
+        // Check if cookies were previously accepted
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(() => {
+                    document.querySelector('.cookie-banner').classList.add('show');
+                }, 1000);
+            }
         });
     </script>
 </body>
