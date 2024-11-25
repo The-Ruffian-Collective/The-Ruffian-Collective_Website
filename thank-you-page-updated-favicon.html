@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - The Ruffian Collective</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+        .image-container {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .circular-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background-color: #000;
+            color: #fff;
+        }
+        .nowrap {
+            white-space: nowrap;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .or-text {
+            font-size: 1em;
+            opacity: 0.7;
+        }
+        .favicon-button {
+            width: 48px;
+            height: 48px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background: none;
+        }
+        .favicon-button:hover {
+            transform: scale(1.1);
+        }
+        .favicon-button img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="https://cdn.midjourney.com/aace6472-2bc3-4a60-ad24-0c12be5d60b1/0_0.png" alt="The Ruffian Collective" class="circular-image">
+        </div>
+        <h1>Thank You for Joining<br><span class="nowrap">The Collective</span></h1>
+        <p>Your curiosity has been noted. Sit tight & expect the unexpected. <span class="nowrap">The future is here!</span></p>
+        <div class="button-container">
+            <a href="index.html" class="btn">Return to Homepage</a>
+            <span class="or-text">or</span>
+            <button class="favicon-button" id="ai-button" aria-label="Launch AI Assistant">
+                <img src="https://cdn.midjourney.com/503aff12-9794-4e12-855d-05a643c0e739/0_0.png" alt="AI Assistant">
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('ai-button').addEventListener('click', function() {
+            // Replace with the actual link to your Custom GPT when it's ready
+            window.open('https://your-custom-gpt-link.com', '_blank');
+        });
+    </script>
+</body>
+</html>

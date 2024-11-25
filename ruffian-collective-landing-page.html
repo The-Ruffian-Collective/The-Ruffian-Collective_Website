@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ruffian Collective</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #000;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #00f5d4;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.midjourney.com/246f3e19-1db7-4a4c-b6ce-31d765c11e5f/0_0.png') no-repeat center center/cover;
+        }
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00f5d4;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 87px; /* Increased from 60px to 87px to lower the button by approximately 7mm */
+        }
+        .btn:hover {
+            background-color: #00d4b8;
+        }
+        .section {
+            padding: 80px 0;
+        }
+        .section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .services {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .service-item {
+            width: 30%;
+            margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .service-item:hover {
+            transform: translateY(-10px);
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .about-text {
+            width: 60%;
+        }
+        .about-image {
+            width: 35%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        @media (max-width: 768px) {
+            .service-item {
+                width: 100%;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .about-text, .about-image {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Welcome to The Ruffian Collective</h1>
+                <p>Revolutionising industries through innovative SAAS solutions and creative marketing strategies</p>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services">
+                    <div class="service-item">
+                        <h3>AI-Powered SAAS</h3>
+                        <p>Cutting-edge software solutions driven by artificial intelligence</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Creative Marketing</h3>
+                        <p>Innovative strategies to elevate your brand and reach your target audience</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>AI Consultancy</h3>
+                        <p>Expert guidance on implementing AI solutions in your business</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About The Collective</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>The Ruffian Collective is a restless cluster of creative thinkers at the intersection of AI and innovation. We harness the power of cutting-edge technology and creative thinking to revolutionise industries and everyday life. Our team of Ruffians works behind the scenes, crafting fine-tuned SAAS solutions and zeitgeist marketing strategies that solve problems AND ask questions!</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://cdn.midjourney.com/u/02ddf64c-9530-474c-92c6-4481b15a930a/fb73cce0ef3a597e8c773934aac88f3dddabde99100e6b1e8428ccdc7e08c724.png" alt="The Ruffian Collective AI Persona">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <form id="contact-form">
+                    <input type="text" id="name" placeholder="Your Name" required>
+                    <input type="email" id="email" placeholder="Your Email" required>
+                    <textarea id="message" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 The Ruffian Collective. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behaviour: 'smooth'
+                    });
+                });
+            });
+
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message. We will get back to you soon!');
+                window.location.href = 'thank-you-page-updated-favicon.html'; // Redirect to thank you page
+            });
+
+            setTimeout(() => {
+                const servicesSection = document.querySelector('.services');
+                const newService = document.createElement('div');
+                newService.className = 'service-item';
+                newService.innerHTML = '<h3>Data Analytics</h3><p>Advanced data analysis to drive informed decision-making</p>';
+                servicesSection.appendChild(newService);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
