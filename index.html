@@ -77,6 +77,46 @@
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
         }
 
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+            background: #00f5d4;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+            background: #00f5d4;
+        }
+
+        nav {
+            position: relative;
+        }
+
         nav ul {
             list-style-type: none;
             padding: 0;
@@ -84,6 +124,7 @@
             justify-content: space-around;
             max-width: 800px;
             margin: 0 auto;
+            transition: all 0.3s ease;
         }
 
         nav ul li a {
@@ -309,6 +350,46 @@
     border-top: 1px solid rgba(0, 245, 212, 0.1);
 }
         @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 100%;
+                max-width: 300px;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transition: right 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav ul li {
+                opacity: 0;
+                transform: translateX(50px);
+                transition: all 0.3s ease;
+            }
+
+            nav ul.active li {
+                opacity: 1;
+                transform: translateX(0);
+                transition-delay: 0.2s;
+            }
+
+            nav ul li:nth-child(2) { transition-delay: 0.1s; }
+            nav ul li:nth-child(3) { transition-delay: 0.2s; }
+            nav ul li:nth-child(4) { transition-delay: 0.3s; }
+
             .hero h1 {
                 font-size: 2.5em;
             }
@@ -410,12 +491,50 @@
     background: #00d4b6;
     transform: translateY(-2px);
 }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0, 245, 212, 0.2);
+            color: #00f5d4;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            border: 2px solid #00f5d4;
+            font-size: 24px;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background: rgba(0, 245, 212, 0.3);
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 <body>
     <div class="bg-image"></div>
     <header>
         <nav>
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
@@ -504,6 +623,10 @@
         <p>We use cookies to enhance your experience and analyze site usage. By continuing to use this site, you consent to our use of cookies.</p>
         <button class="btn" onclick="acceptCookies()">Accept & Close</button>
     </div>
+
+    <button class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -594,6 +717,50 @@
                 setTimeout(() => {
                     document.querySelector('.cookie-banner').classList.add('show');
                 }, 1000);
+            }
+        });
+
+        // Scroll to top functionality
+        const scrollToTopBtn = document.querySelector('.scroll-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('nav ul');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
             }
         });
     </script>
