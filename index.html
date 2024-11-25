@@ -342,7 +342,7 @@
             <div class="container">
                 <h1>Welcome to The Ruffian Collective</h1>
                 <p>Revolutionising industries through innovative SaaS solutions and creative marketing strategies</p>
-                <a href="#contact" class="btn">Get Started</a>
+                <a href="#contact" class="btn">Reach Out</a>
             </div>
         </section>
 
@@ -388,11 +388,12 @@
             <section id="contact" class="section">
                 <div class="container">
                     <h2>Contact Us</h2>
-                    <form id="contact-form" onsubmit="window.location.href='thank-you.html'; return false;">
+                    <form id="contact-form">
                         <input type="text" id="name" placeholder="Your Name" required>
                         <input type="email" id="email" placeholder="Your Email" required>
                         <textarea id="message" placeholder="Your Message" required></textarea>
                         <button type="submit" class="btn">Send Message</button>
+                        <div id="form-status" style="margin-top: 10px; text-align: center;"></div>
                     </form>
                 </div>
             </section>
@@ -405,7 +406,68 @@
         </div>
     </footer>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
     <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSW_bD98jAUXMEEsV5f0VFipJhUn8wVUo",
+            authDomain: "ruffian-collective.firebaseapp.com",
+            projectId: "ruffian-collective",
+            storageBucket: "ruffian-collective.firebasestorage.app",
+            messagingSenderId: "812554351915",
+            appId: "1:812554351915:web:2992367487887f53e3c16e",
+            measurementId: "G-1R6N8Z3Q86"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+
+    <script>
+        // Contact form submission handler
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = this.querySelector('button[type="submit"]');
+            const formStatus = document.getElementById('form-status');
+            
+            // Disable submit button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            formStatus.textContent = '';
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            try {
+                await db.collection('contacts').add({
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                // Clear form
+                this.reset();
+                
+                // Redirect to thank you page
+                window.location.href = 'thank-you.html';
+            } catch (error) {
+                console.error("Error submitting form: ", error);
+                formStatus.textContent = "There was an error submitting your message. Please try again.";
+                formStatus.style.color = "#ff4444";
+                
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Send Message';
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
