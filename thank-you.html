@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thank you for contacting The Ruffian Collective">
+    <title>Thank You - The Ruffian Collective</title>
+    <link rel="preload" as="image" href="https://i.ibb.co/PM3mdxr/bornraskull-No-Text-chaos-20-ar-169-style-raw-sref-htt-49308303-dc8b-4bbc-b4e9-4933c57e45e3.png">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
+            background-color: rgba(0, 0, 0, 0.7); /* Lighter fallback */
+            color: #fff;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Reduced overlay opacity */
+            z-index: -1;
+        }
+
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.ibb.co/PM3mdxr/bornraskull-No-Text-chaos-20-ar-169-style-raw-sref-htt-49308303-dc8b-4bbc-b4e9-4933c57e45e3.png') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #00f5d4;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: 2px solid #00f5d4;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 245, 212, 0.3);
+        }
+        .btn:hover {
+            background-color: #00f5d4;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 245, 212, 0.4);
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .or-text {
+            font-size: 1em;
+            opacity: 0.7;
+        }
+
+        .favicon-button {
+            width: 48px;
+            height: 48px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background: none;
+        }
+
+        .favicon-button:hover {
+            transform: scale(1.1);
+        }
+
+        .favicon-button img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-image"></div>
+    <div class="container">
+        <h1>Thank You for Joining<br><span class="nowrap">The Collective</span></h1>
+        <p>Your curiosity has been noted. Sit tight & expect the unexpected. <span class="nowrap">The future is here!</span></p>
+        <div class="button-container">
+            <a href="index.html" class="btn">Return to Homepage</a>
+            <span class="or-text">or</span>
+            <button class="favicon-button" id="ai-button" aria-label="Launch AI Assistant">
+                <img src="https://i.ibb.co/WH6ZSMM/0-0-35.png" alt="AI Assistant">
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('ai-button').addEventListener('click', function() {
+            // Replace with the actual link when ready
+            alert('Watch this space...');
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgImage = document.querySelector('.bg-image');
+            bgImage.style.opacity = 1;
+            document.body.style.opacity = 1;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ruffian Collective</title>
+    <link rel="preload" as="image" href="https://i.ibb.co/GHLDC7X/bornraskull-no-text-chaos-2-ar-169-style-raw-stylize-9-c9391b26-7a68-4280-836b-5e7a9d63c9c0.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
+            background-color: rgba(0, 0, 0, 0.7); /* Lighter fallback */
+            color: #fff;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Reduced overlay opacity */
+            z-index: -1;
+        }
+
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.ibb.co/GHLDC7X/bornraskull-no-text-chaos-2-ar-169-style-raw-stylize-9-c9391b26-7a68-4280-836b-5e7a9d63c9c0.png') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            color: #00f5d4;
+            background-color: rgba(0, 245, 212, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .hero p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero .btn {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            border: 2px solid #00f5d4;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 245, 212, 0.3);
+        }
+        .hero .btn:hover {
+            background-color: #00f5d4;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 245, 212, 0.4);
+        }
+        .section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lower-sections-wrapper {
+            position: relative;
+        }
+
+        #about, #services, #contact {
+            position: relative;
+        }
+
+        #about::before,
+        #contact::before,
+        #contact::after {
+            display: none;
+        }
+
+        .section h2 {
+            color: #00f5d4;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .about-text h2 {
+            text-align: left;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        #services h2, #contact h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .about-text p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            height: 500px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .service-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 245, 212, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 245, 212, 0.03), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        .service-item:hover::before {
+            transform: translateX(100%);
+        }
+        .service-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 245, 212, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 245, 212, 0.1);
+        }
+        .service-item h3 {
+            color: #00f5d4;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .service-item p {
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        #contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 245, 212, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        #contact input,
+        #contact textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        #contact input:focus,
+        #contact textarea:focus {
+            border-color: #00f5d4;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.2);
+        }
+        #contact textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        footer {
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(0, 245, 212, 0.1);
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .services {
+                grid-template-columns: 1fr;
+            }
+            #contact form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-image"></div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Welcome to The Ruffian Collective</h1>
+                <p>Revolutionising industries through innovative SaaS solutions and creative marketing strategies</p>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services">
+                    <div class="service-item">
+                        <h3>AI-Powered SaaS</h3>
+                        <p>Cutting-edge software solutions driven by artificial intelligence</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Creative Marketing</h3>
+                        <p>Innovative strategies to elevate your brand and reach your target audience</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>AI Consultancy</h3>
+                        <p>Expert guidance on implementing AI solutions in your business</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Data Analytics</h3>
+                        <p>Advanced data analysis to drive informed decision-making</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="lower-sections-wrapper">
+            <section id="about" class="section">
+                <div class="container">
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h2>About The Collective</h2>
+                            <p>The Ruffian Collective is a restless cluster of creative thinkers at the intersection of AI and innovation. We harness the power of cutting-edge technology and creative thinking to revolutionise industries and everyday life. Our team of Ruffians works behind the scenes, crafting fine-tuned SaaS solutions and zeitgeist marketing strategies that solve problems AND ask questions!</p>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://i.ibb.co/7KyGRS1/fb73cce0ef3a597e8c773934aac88f3dddabde99100e6b1e8428ccdc7e08c724.png" alt="The Ruffian Collective AI Persona">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <div class="container">
+                    <h2>Contact Us</h2>
+                    <form id="contact-form" onsubmit="window.location.href='thank-you.html'; return false;">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                        <textarea id="message" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 The Ruffian Collective. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behaviour: 'smooth'
+                    });
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgImage = document.querySelector('.bg-image');
+            bgImage.style.opacity = 1;
+            document.body.style.opacity = 1;
+        });
+    </script>
+</body>
+</html>
