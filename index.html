@@ -458,8 +458,8 @@
                 // Redirect to thank you page
                 window.location.href = 'thank-you.html';
             } catch (error) {
-                console.error("Error submitting form: ", error);
-                formStatus.textContent = "There was an error submitting your message. Please try again.";
+                console.error("Error submitting form:", error.code, error.message);
+                formStatus.textContent = `Error: ${error.message || "There was an error submitting your message. Please try again."}`;
                 formStatus.style.color = "#ff4444";
                 
                 // Re-enable submit button
