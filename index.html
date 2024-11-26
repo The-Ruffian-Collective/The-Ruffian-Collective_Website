@@ -281,49 +281,70 @@
 
         .services {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
+            margin-top: 40px;
         }
+
         .service-item {
-            background-color: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.3);
             padding: 30px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
+            border-radius: 10px;
             border: 1px solid rgba(0, 245, 212, 0.1);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
+            perspective: 1000px;
+            cursor: pointer;
+            height: 200px;
         }
-        .service-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        .service-item-inner {
+            position: relative;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(0, 245, 212, 0.03), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
         }
-        .service-item:hover::before {
-            transform: translateX(100%);
+
+        .service-item:hover .service-item-inner {
+            transform: rotateY(180deg);
         }
-        .service-item:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 245, 212, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 245, 212, 0.1);
+
+        .service-front, .service-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+
+        .service-back {
+            background: rgba(0, 0, 0, 0.4);
+            transform: rotateY(180deg);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
         .service-item h3 {
             color: #00f5d4;
-            margin-bottom: 15px;
+            margin: 0 0 15px 0;
             font-size: 1.5em;
         }
+
         .service-item p {
+            margin: 0;
             line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
         }
+
+        @media (max-width: 768px) {
+            .service-item {
+                height: 220px;
+            }
+        }
+
         #contact form {
             max-width: 600px;
             margin: 0 auto;
@@ -588,20 +609,48 @@
                 <h2>Our Services</h2>
                 <div class="services">
                     <div class="service-item">
-                        <h3>AI-Powered SaaS</h3>
-                        <p>Cutting-edge software solutions driven by artificial intelligence</p>
+                        <div class="service-item-inner">
+                            <div class="service-front">
+                                <h3>AI-Powered SaaS</h3>
+                                <p>Cutting-edge software solutions driven by artificial intelligence</p>
+                            </div>
+                            <div class="service-back">
+                                <p>Leverage state-of-the-art AI technologies to automate processes, enhance decision-making, and drive innovation in your software solutions.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="service-item">
-                        <h3>Creative Marketing</h3>
-                        <p>Innovative strategies to elevate your brand and reach your target audience</p>
+                        <div class="service-item-inner">
+                            <div class="service-front">
+                                <h3>Creative Marketing</h3>
+                                <p>Innovative strategies to elevate your brand and reach your target audience</p>
+                            </div>
+                            <div class="service-back">
+                                <p>Transform your brand presence with data-driven marketing strategies, compelling content creation, and targeted campaign management.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="service-item">
-                        <h3>AI Consultancy</h3>
-                        <p>Expert guidance on implementing AI solutions in your business</p>
+                        <div class="service-item-inner">
+                            <div class="service-front">
+                                <h3>AI Consultancy</h3>
+                                <p>Expert guidance on implementing AI solutions in your business</p>
+                            </div>
+                            <div class="service-back">
+                                <p>Get personalized guidance on AI integration, from strategy development to implementation, ensuring your business stays ahead of the curve.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="service-item">
-                        <h3>Data Analytics</h3>
-                        <p>Advanced data analysis to drive informed decision-making</p>
+                        <div class="service-item-inner">
+                            <div class="service-front">
+                                <h3>Data Analytics</h3>
+                                <p>Advanced data analysis to drive informed decision-making</p>
+                            </div>
+                            <div class="service-back">
+                                <p>Turn your data into actionable insights with advanced analytics, predictive modeling, and comprehensive reporting solutions.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
