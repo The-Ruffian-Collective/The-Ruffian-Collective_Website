@@ -54,11 +54,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://i.ibb.co/GHLDC7X/bornraskull-no-text-chaos-2-ar-169-style-raw-stylize-9-c9391b26-7a68-4280-836b-5e7a9d63c9c0.png') no-repeat center center fixed;
+            background: url('https://i.ibb.co/GHLDC7X/bornraskull-no-text-chaos-2-ar-169-style-raw-stylize-9-c9391b26-7a68-4280-836b-5e7a9d63c9c0.png') no-repeat center center;
             background-size: cover;
             z-index: -2;
             opacity: 0;
             transition: opacity 0.5s ease-in;
+        }
+
+        @media (min-width: 769px) {
+            .bg-image {
+                background-attachment: fixed;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bg-image {
+                background-position: center;
+                height: 100vh;
+                width: 100vw;
+            }
         }
 
         .container {
