@@ -25,7 +25,7 @@
             padding: 0;
             font-family: 'Arial', sans-serif;
             scroll-behavior: smooth;
-            background-color: rgba(0, 0, 0, 0.7); /* Lighter fallback */
+            background-color: rgba(0, 0, 0, 0.4); /* Reduced from 0.7 */
             color: #fff;
             position: relative;
             opacity: 0;
@@ -44,7 +44,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3); /* Reduced overlay opacity */
+            background: rgba(0, 0, 0, 0.2); /* Reduced from 0.3 */
             z-index: -1;
         }
 
@@ -94,37 +94,76 @@
         .hamburger {
             display: none;
             cursor: pointer;
-            padding: 10px;
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
             background: none;
             border: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
             z-index: 1001;
         }
 
         .hamburger span {
             display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px 0;
-            background: #fff;
+            width: 100%;
+            height: 2px;
+            background-color: #00f5d4;
+            margin: 4px 0;
             transition: all 0.3s ease;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-            background: #00f5d4;
-        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
 
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
+            nav ul {
+                display: flex;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 100%;
+                max-width: 300px;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transition: right 0.3s ease;
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+            }
 
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-            background: #00f5d4;
+            nav ul.active {
+                right: 0;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            body.menu-open {
+                overflow: hidden;
+            }
+
+            body.menu-open::after {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
         }
 
         nav {
@@ -165,274 +204,6 @@
         @media (max-width: 768px) {
             nav ul {
                 display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.95);
-                padding: 20px;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav.active ul {
-                display: flex;
-            }
-
-            nav a {
-                display: inline-block;
-                width: 150px;
-                text-align: center;
-                background: rgba(0, 0, 0, 0.3);
-            }
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero h1 {
-            position: relative;
-            z-index: 1;
-            font-size: 4em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .hero p {
-            position: relative;
-            z-index: 1;
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hero .btn {
-            position: relative;
-            z-index: 1;
-            display: inline-block;
-            padding: 15px 40px;
-            background-color: transparent;
-            color: #00f5d4;
-            text-decoration: none;
-            border: 2px solid #00f5d4;
-            border-radius: 30px;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-            margin-top: 30px;
-            position: relative;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 245, 212, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(0, 245, 212, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 245, 212, 0);
-            }
-        }
-
-        .hero .btn:hover {
-            background-color: #00f5d4;
-            color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 245, 212, 0.4);
-            animation: none;
-        }
-        .section {
-            padding: 100px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .lower-sections-wrapper {
-            position: relative;
-        }
-
-        #about, #services, #contact {
-            position: relative;
-        }
-
-        #about::before,
-        #contact::before,
-        #contact::after {
-            display: none;
-        }
-
-        .section h2 {
-            color: #00f5d4;
-            font-size: 2.5em;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .about-text h2 {
-            text-align: left;
-            margin-bottom: 20px;
-            padding-left: 20px;
-        }
-
-        #services h2, #contact h2 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .about-text p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .about-image {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            aspect-ratio: 4/5;
-            height: 500px;
-        }
-
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .service-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 245, 212, 0.1);
-            transition: all 0.3s ease;
-            perspective: 1000px;
-            cursor: pointer;
-            height: 200px;
-        }
-
-        .service-item-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-        }
-
-        .service-item:hover .service-item-inner {
-            transform: rotateY(180deg);
-        }
-
-        .service-front, .service-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .service-back {
-            background: rgba(0, 0, 0, 0.4);
-            transform: rotateY(180deg);
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        .service-item h3 {
-            color: #00f5d4;
-            margin: 0 0 15px 0;
-            font-size: 1.5em;
-        }
-
-        .service-item p {
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-            .service-item {
-                height: 220px;
-            }
-        }
-
-        #contact form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 245, 212, 0.1);
-            backdrop-filter: blur(10px);
-        }
-        #contact input,
-        #contact textarea {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(0, 245, 212, 0.2);
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1em;
-            transition: all 0.3s ease;
-        }
-        #contact input:focus,
-        #contact textarea:focus {
-            border-color: #00f5d4;
-            outline: none;
-            box-shadow: 0 0 10px rgba(0, 245, 212, 0.2);
-        }
-        #contact textarea {
-            height: 150px;
-            resize: vertical;
-        }
-        footer {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px 0;
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    border-top: 1px solid rgba(0, 245, 212, 0.1);
-}
-        @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-
-            nav ul {
                 position: fixed;
                 top: 0;
                 right: -100%;
@@ -446,6 +217,7 @@
                 gap: 30px;
                 transition: right 0.3s ease;
                 backdrop-filter: blur(10px);
+                z-index: 1000;
             }
 
             nav ul.active {
@@ -618,24 +390,443 @@
             background: rgba(0, 245, 212, 0.3);
             transform: translateY(-5px);
         }
+
+        /* ROI Calculator Styles */
+        #roi-calculator {
+            background: rgba(0, 0, 0, 0.2); /* Reduced from default darker background */
+            padding: 60px 0;
+        }
+        
+        .calculator-intro {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        
+        .calculator-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.15); /* Light background */
+            border-radius: 20px;
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .calculator-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin: 30px 0;
+            max-width: 800px;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .calculator-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            width: 100%;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .calc-input {
+            padding: 12px;
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .calc-input:focus {
+            outline: none;
+            border-color: #00f5d4;
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.2);
+        }
+
+        .calc-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        #process-select {
+            height: 42px;
+            appearance: none;
+            padding-right: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300f5d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+        }
+
+        .result-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 245, 212, 0.2);
+        }
+
+        .result-item h4 {
+            color: #00f5d4;
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .result-item p {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .btn {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: transparent;
+            color: #00f5d4;
+            text-decoration: none;
+            border: 2px solid #00f5d4;
+            border-radius: 30px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 245, 212, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 245, 212, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 245, 212, 0);
+            }
+        }
+
+        .hero .btn:hover {
+            background-color: #00f5d4;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 245, 212, 0.4);
+            animation: none;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .lower-sections-wrapper {
+            position: relative;
+        }
+
+        #about, #services, #contact {
+            position: relative;
+        }
+
+        .section h2 {
+            color: #00f5d4;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .about-text p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            height: 500px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 245, 212, 0.1);
+            transition: all 0.3s ease;
+            perspective: 1000px;
+            cursor: pointer;
+            height: 200px;
+        }
+
+        .service-item-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .service-item:hover .service-item-inner {
+            transform: rotateY(180deg);
+        }
+
+        .service-front, .service-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .service-back {
+            background: rgba(0, 0, 0, 0.4);
+            transform: rotateY(180deg);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .service-item h3 {
+            color: #00f5d4;
+            margin: 0 0 15px 0;
+            font-size: 1.5em;
+        }
+
+        .service-item p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .service-item {
+                height: 220px;
+            }
+        }
+
+        #contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 245, 212, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        #contact input,
+        #contact textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        #contact input:focus,
+        #contact textarea:focus {
+            border-color: #00f5d4;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.2);
+        }
+
+        #contact textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px 0;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            border-top: 1px solid rgba(0, 245, 212, 0.1);
+        }
+
+        /* Calculator styles */
+        .calculator-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin: 30px 0;
+            max-width: 800px;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .calculator-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            width: 100%;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .calc-input {
+            padding: 12px;
+            border: 1px solid rgba(0, 245, 212, 0.2);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .calc-input:focus {
+            outline: none;
+            border-color: #00f5d4;
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.2);
+        }
+
+        .calc-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        #process-select {
+            height: 42px;
+            appearance: none;
+            padding-right: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300f5d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+        }
+
+        .result-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 245, 212, 0.2);
+        }
+
+        .result-item h4 {
+            color: #00f5d4;
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .result-item p {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-image"></div>
     <header>
-        <nav>
-            <button class="hamburger" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav>
+                <button class="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#roi-calculator">ROI Calculator</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
@@ -698,7 +889,50 @@
                 </div>
             </div>
         </section>
-
+<!-- ROI Calculator Preview Section -->
+<section id="roi-calculator" class="section">
+    <div class="container">
+        <h2>Automation ROI Calculator</h2>
+        <p class="calculator-intro">Calculate how much your business could save through automation</p>
+        
+        <div class="calculator-container">
+            <div class="calculator-inputs">
+                <div class="input-group">
+                    <label for="process-select">Select a process:</label>
+                    <select id="process-select" class="calc-input">
+                        <option value="meeting-scheduling">Meeting Scheduling & Calendar Management</option>
+                        <option value="invoice-processing">Invoice Processing & Payment Tracking</option>
+                        <option value="inventory-management">Inventory Management</option>
+                        <option value="report-generation">Report Generation & Analytics</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="employees">Number of employees:</label>
+                    <input type="number" id="employees" class="calc-input" min="1" placeholder="e.g., 5">
+                </div>
+                <div class="input-group">
+                    <label for="hours">Hours worked per week:</label>
+                    <input type="number" id="hours" class="calc-input" min="1" max="168" placeholder="e.g., 40">
+                </div>
+                <div class="input-group">
+                    <label for="rate">Average hourly rate (£):</label>
+                    <input type="number" id="rate" class="calc-input" min="1" placeholder="e.g., 25">
+                </div>
+            </div>
+            
+            <div class="calculator-results">
+                <div class="result-item">
+                    <h4>Annual Hours Saved:</h4>
+                    <p id="hours-saved">0</p>
+                </div>
+                <div class="result-item">
+                    <h4>Annual Cost Savings:</h4>
+                    <p id="cost-saved">£0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
         <div class="lower-sections-wrapper">
             <section id="about" class="section">
                 <div class="container">
@@ -826,6 +1060,26 @@
             });
         });
         document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behaviour: 'smooth'
+                    });
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behaviour: 'smooth'
+                    });
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
             const bgImage = document.querySelector('.bg-image');
             bgImage.style.opacity = 1;
             document.body.style.opacity = 1;
@@ -871,13 +1125,14 @@
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
         });
 
-        // Close menu when clicking a link
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
             });
         });
 
@@ -886,8 +1141,79 @@
             if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
             }
         });
+    </script>
+
+    <script>
+        // ROI Calculator Form Handling
+        document.getElementById('calculator-access').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('calc-email').value;
+            
+            // Store email for later use
+            localStorage.setItem('calculator_email', email);
+            
+            // Here you would typically send the email to your backend
+            // For now, we'll just show a success message
+            const form = this;
+            const btn = form.querySelector('button');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Processing...';
+            
+            // Simulate processing
+            setTimeout(() => {
+                btn.textContent = 'Success! ';
+                form.reset();
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+                
+                // TODO: Implement actual form submission and calculator display
+            }, 1000);
+        });
+    </script>
+
+    <script>
+        // ROI Calculator functionality
+        function updateCalculations() {
+            const process = document.getElementById('process-select').value;
+            const employees = parseInt(document.getElementById('employees').value) || 0;
+            const hours = parseInt(document.getElementById('hours').value) || 0;
+            const rate = parseFloat(document.getElementById('rate').value) || 0;
+
+            // Assume 20% of time is spent on the selected task
+            const timeSpentOnTask = 0.2;
+            
+            // Different time reduction percentages based on process type
+            const timeReduction = {
+                'meeting-scheduling': 0.7, // 70% time reduction
+                'invoice-processing': 0.8, // 80% time reduction
+                'inventory-management': 0.6, // 60% time reduction
+                'report-generation': 0.75 // 75% time reduction
+            };
+
+            // Calculate annual hours saved
+            const annualHours = employees * hours * 52 * timeSpentOnTask * timeReduction[process];
+            const annualSavings = annualHours * rate;
+
+            // Update the display with formatted numbers
+            document.getElementById('hours-saved').textContent = Math.round(annualHours).toLocaleString();
+            document.getElementById('cost-saved').textContent = '£' + Math.round(annualSavings).toLocaleString();
+        }
+
+        // Add event listeners to all calculator inputs
+        document.getElementById('process-select').addEventListener('change', updateCalculations);
+        document.getElementById('employees').addEventListener('input', updateCalculations);
+        document.getElementById('hours').addEventListener('input', updateCalculations);
+        document.getElementById('rate').addEventListener('input', updateCalculations);
+
+        // Initial calculation
+        updateCalculations();
     </script>
 </body>
 </html>
