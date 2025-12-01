@@ -1126,26 +1126,6 @@
             });
         });
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behaviour: 'smooth'
-                    });
-                });
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behaviour: 'smooth'
-                    });
-                });
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
             const bgImage = document.querySelector('.bg-image');
             bgImage.style.opacity = 1;
             document.body.style.opacity = 1;
@@ -1210,37 +1190,6 @@
         });
     </script>
 
-    <script>
-        // ROI Calculator Form Handling
-        document.getElementById('calculator-access').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('calc-email').value;
-            
-            // Store email for later use
-            localStorage.setItem('calculator_email', email);
-            
-            // Here you would typically send the email to your backend
-            // For now, we'll just show a success message
-            const form = this;
-            const btn = form.querySelector('button');
-            const originalText = btn.textContent;
-            
-            btn.textContent = 'Processing...';
-            
-            // Simulate processing
-            setTimeout(() => {
-                btn.textContent = 'Success! ';
-                form.reset();
-                
-                // Reset button after 2 seconds
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 2000);
-                
-                // TODO: Implement actual form submission and calculator display
-            }, 1000);
-        });
-    </script>
 
     <script>
         // ROI Calculator functionality
